@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ITMS Academy — Школа мерчандайзинга</title>
+  <style>
+    :root {
+      --bg-main: #020617;
+      --bg-card: #0f172a;
+      --bg-card-sub: #1e293b;
+      --border-color: #334155;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-blue: #2563eb;
+      --accent-blue-hover: #1d4ed8;
+      --accent-amber: #f59e0b;
+      --accent-emerald: #10b981;
+      --accent-rose: #f43f5e;
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      line-height: 1.5;
+      padding-bottom: 80px; /* Отступ под мобильную нижнюю панель */
+      min-height: 100vh;
+    }
+
+    /* Шапка сайта */
+    header {
+      background-color: rgba(15, 23, 42, 0.95);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(8px);
+    }
+
+    .header-container {
+      max-w: 1100px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar-logo {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #2563eb, #6366f1);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+      animation: catBob 3s ease-in-out infinite;
+    }
+
+    @keyframes catBob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    .brand-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-badge {
+      font-size: 0.65rem;
+      background: rgba(37, 99, 235, 0.2);
+      color: #60a5fa;
+      border: 1px solid rgba(37, 99, 235, 0.4);
+      padding: 2px 6px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .brand-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* XP значок */
+    .xp-pill {
+      background: var(--bg-card-sub);
+      border: 1px solid var(--border-color);
+      padding: 6px 14px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent-amber);
+    }
+
+    /* Навигация десктоп */
+    .desktop-nav {
+      display: none;
+      gap: 8px;
+      background: var(--bg-card-sub);
+      padding: 4px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .nav-btn.active {
+      background: var(--accent-blue);
+      color: #fff;
+    }
+
+    /* Контейнер страниц */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    .section-tab {
+      display: none;
+    }
+
+    .section-tab.active {
+      display: block;
+    }
+
+    /* Карточки */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Прогресс-бар */
+    .step-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 10px;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: var(--bg-card-sub);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #2563eb, #6366f1);
+      border-radius: 999px;
+      transition: width 0.3s ease;
+    }
+
+    /* Горизонтальный скролл шагов */
+    .steps-scroll-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+    }
+    .steps-scroll-row::-webkit-scrollbar { display: none; }
+
+    .step-chip {
+      flex: 0 0 auto;
+      background: var(--bg-card-sub);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .step-chip.active {
+      background: rgba(37, 99, 235, 0.2);
+      border-color: var(--accent-blue);
+      color: #93c5fd;
+    }
+
+    /* Переключатель Обучение/Практика */
+    .mode-switch-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 16px 0;
+    }
+
+    .mode-switch {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 4px;
+      border-radius: 14px;
+      display: inline-flex;
+      gap: 6px;
+    }
+
+    .mode-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+    }
+
+    .mode-btn.active-theory {
+      background: var(--accent-blue);
+      color: #fff;
+    }
+
+    .mode-btn.active-practice {
+      background: var(--accent-amber);
+      color: #000;
+    }
+
+    /* Персонаж Барсик */
+    .cat-dialogue-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .cat-avatar-large {
+      font-size: 40px;
+      line-height: 1;
+      animation: catBob 3s ease-in-out infinite;
+    }
+
+    /* Сетка Do / Don't */
+    .grid-rules {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .rules-card {
+      border-radius: 16px;
+      padding: 16px;
+      font-size: 0.8rem;
+    }
+
+    .rules-card.do {
+      background: rgba(16, 185, 129, 0.05);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .rules-card.dont {
+      background: rgba(244, 63, 94, 0.05);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+
+    .rules-header {
+      font-weight: 800;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .rules-card.do .rules-header { color: var(--accent-emerald); }
+    .rules-card.dont .rules-header { color: var(--accent-rose); }
+
+    .rule-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 8px;
+      color: #cbd5e1;
+    }
+
+    /* Практика кейсов */
+    .case-option-btn {
+      width: 100%;
+      text-align: left;
+      padding: 14px 16px;
+      background: var(--bg-card-sub);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      color: #e2e8f0;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s;
+    }
+
+    .case-option-btn:hover {
+      background: #273549;
+    }
+
+    .case-option-btn.opt-correct {
+      border-color: var(--accent-emerald);
+      background: rgba(16, 185, 129, 0.15);
+      color: #a7f3d0;
+    }
+
+    .case-option-btn.opt-wrong {
+      border-color: var(--accent-rose);
+      background: rgba(244, 63, 94, 0.15);
+      color: #fecdd3;
+    }
+
+    .case-feedback {
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      margin-top: 14px;
+      display: none;
+    }
+
+    /* Навигация шагов снизу */
+    .step-nav-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .btn-action {
+      background: var(--accent-blue);
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-action:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .btn-action.btn-secondary {
+      background: var(--bg-card-sub);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+
+    /* Шпаргалка брендов */
+    .filter-scroll-row {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+      scrollbar-width: none;
+    }
+    .filter-scroll-row::-webkit-scrollbar { display: none; }
+
+    .brands-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .brand-item-card {
+      background: var(--bg-card-sub);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .pack-mockup {
+      height: 110px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: center;
+      padding: 6px;
+    }
+
+    .pack-badge {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: rgba(0, 0, 0, 0.5);
+      font-size: 0.6rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #fff;
+    }
+
+    /* Экзамен и Сертификат */
+    .exam-input {
+      width: 100%;
+      max-width: 340px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: var(--bg-card-sub);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      font-size: 0.9rem;
+      margin: 12px 0;
+      text-align: center;
+    }
+
+    .cert-container {
+      background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+      border: 2px solid rgba(245, 158, 11, 0.5);
+      border-radius: 20px;
+      padding: 24px;
+      text-align: left;
+      position: relative;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      margin: 20px 0;
+    }
+
+    /* Мобильная нижняя панель навигации */
+    .mobile-tab-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15, 23, 42, 0.97);
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 6px;
+      z-index: 99;
+      backdrop-filter: blur(10px);
+    }
+
+    .tab-bar-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.65rem;
+      font-weight: 600;
+      gap: 4px;
+      cursor: pointer;
+      width: 25%;
+    }
+
+    .tab-bar-item svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    .tab-bar-item.active {
+      color: #60a5fa;
+    }
+
+    /* Адаптив под планшеты и десктоп */
+    @media (min-width: 768px) {
+      body { padding-bottom: 24px; }
+      .desktop-nav { display: flex; }
+      .mobile-tab-bar { display: none; }
+      .grid-rules { grid-template-columns: 1fr 1fr; }
+      .brands-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    @media (min-width: 1024px) {
+      .brands-grid { grid-template-columns: repeat(6, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ВЕРХНЯЯ ШАПКА -->
+  <header>
+    <div class="header-container">
+      <div class="brand-wrap">
+        <div class="avatar-logo">🐱</div>
+        <div>
+          <div class="brand-title">
+            ITMS Academy
+            <span class="brand-badge">EasyMerch V2</span>
+          </div>
+          <div class="brand-sub">Полевой регламент • Наставник: Барсик Семёнович</div>
+        </div>
+      </div>
+
+      <!-- Десктопная навигация -->
+      <nav class="desktop-nav">
+        <button class="nav-btn active" onclick="switchTab('trainer')" id="dTabTrainer">Тренажер</button>
+        <button class="nav-btn" onclick="switchTab('brands')" id="dTabBrands">Каталог брендов</button>
+        <button class="nav-btn" onclick="switchTab('exam')" id="dTabExam">Аттестация</button>
+        <button class="nav-btn" onclick="switchTab('records')" id="dTabRecords">Рекорды</button>
+      </nav>
+
+      <!-- Очки XP -->
+      <div class="xp-pill">
+        <span>⚡</span>
+        <span id="scoreVal">0 XP</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ОСНОВНОЙ КОНТЕНТ -->
+  <main>
+
+    <!-- ================= 1. ТРЕНАЖЕР ШАГОВ ================= -->
+    <section id="tabTrainer" class="section-tab active">
+      
+      <div class="card">
+        <div class="step-header">
+          <div>
+            <span style="font-size:0.75rem; font-weight:800; color:#60a5fa; text-transform:uppercase;" id="stepBadge">Этап 1 из 6</span>
+            <h2 style="font-size:1.25rem; font-weight:800;" id="stepHeading">Подготовка к визиту</h2>
+          </div>
+          <span style="font-size:0.85rem; font-weight:800; color:var(--accent-emerald);" id="stepProgressNum">16%</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="stepProgressBar" style="width: 16%;"></div>
+        </div>
+
+        <!-- Кнопки шагов (горизонтальный скролл) -->
+        <div class="steps-scroll-row">
+          <button onclick="goToStep(0)" class="step-chip active" id="chip0">1. Подготовка</button>
+          <button onclick="goToStep(1)" class="step-chip" id="chip1">2. Check-in</button>
+          <button onclick="goToStep(2)" class="step-chip" id="chip2">3. Склад</button>
+          <button onclick="goToStep(3)" class="step-chip" id="chip3">4. ТШ / Кассы / ДО</button>
+          <button onclick="goToStep(4)" class="step-chip" id="chip4">5. Выкладка / IR</button>
+          <button onclick="goToStep(5)" class="step-chip" id="chip5">6. OOS / Протокол</button>
+        </div>
+      </div>
+
+      <!-- Переключатель режима -->
+      <div class="mode-switch-wrap">
+        <div class="mode-switch">
+          <button class="mode-btn active-theory" id="modeBtnTheory" onclick="toggleMode('theory')">
+            📖 1. Стандарт ITMS
+          </button>
+          <button class="mode-btn" id="modeBtnPractice" onclick="toggleMode('practice')">
+            🎮 2. Кото-Кейс
+          </button>
+        </div>
+      </div>
+
+      <!-- РЕЖИМ 1: ТЕОРИЯ И СТАНДАРТЫ -->
+      <div id="boxTheory">
+        <div class="cat-dialogue-box">
+          <div class="cat-avatar-large" id="theoryCatAvatar">😸</div>
+          <div>
+            <div style="font-size:0.75rem; font-weight:800; color:#60a5fa; text-transform:uppercase;" id="theoryCatRole">Кот-Супервайзер Барсик</div>
+            <p style="font-size:0.85rem; margin-top:4px;" id="theoryCatSpeech">Стандарты визита</p>
+          </div>
+        </div>
+
+        <div class="grid-rules">
+          <div class="rules-card do">
+            <div class="rules-header">✓ КАК ПРАВИЛЬНО (СТАНДАРТ):</div>
+            <div id="rulesDoList"></div>
+          </div>
+          <div class="rules-card dont">
+            <div class="rules-header">✕ ТИПИЧНЫЕ ОШИБКИ (БРАК):</div>
+            <div id="rulesDontList"></div>
+          </div>
+        </div>
+
+        <div class="card" style="background: rgba(37,99,235,0.08); border-color: rgba(37,99,235,0.3); padding:16px;">
+          <div style="font-size:0.75rem; font-weight:800; color:#93c5fd; text-transform:uppercase; margin-bottom:4px;">Лайфхак и речевой модуль:</div>
+          <p style="font-size:0.8rem; font-style:italic;" id="theoryTip"></p>
+        </div>
+      </div>
+
+      <!-- РЕЖИМ 2: ПРАКТИЧЕСКИЙ КЕЙС -->
+      <div id="boxPractice" style="display:none;">
+        <div class="card">
+          <div class="cat-dialogue-box" style="margin-bottom:14px; background:var(--bg-card-sub);">
+            <div class="cat-avatar-large" id="caseCatAvatar">😼</div>
+            <div>
+              <div style="font-size:0.75rem; font-weight:800; color:var(--accent-amber); text-transform:uppercase;" id="caseCatRole">Полевая ситуация</div>
+              <p style="font-size:0.85rem; margin-top:4px;" id="caseScenario"></p>
+            </div>
+          </div>
+
+          <h3 style="font-size:0.9rem; font-weight:800; margin-bottom:12px;" id="caseQuestion"></h3>
+          <div id="caseOptionsList"></div>
+          <div id="caseFeedbackBox" class="case-feedback"></div>
+        </div>
+      </div>
+
+      <!-- Кнопки шага (Предыдущий / Следующий) -->
+      <div class="step-nav-row">
+        <button class="btn-action btn-secondary" onclick="prevStep()" id="btnPrevStep" disabled>← Назад</button>
+        <span style="font-size:0.8rem; color:var(--text-muted);" id="stepFooterNum">Шаг 1 из 6</span>
+        <button class="btn-action" onclick="nextStep()" id="btnNextStep">Далее →</button>
+      </div>
+
+    </section>
+
+    <!-- ================= 2. КАТАЛОГ ПРОДУКЦИИ ================= -->
+    <section id="tabBrands" class="section-tab">
+      <div class="card">
+        <h2 style="font-size:1.25rem; font-weight:800; margin-bottom:4px;">Каталог продукции ITMS</h2>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:14px;">Мерчандайзер обязан безошибочно отличать линейки пачек, стиков и девайсов.</p>
+
+        <div class="filter-scroll-row">
+          <button class="step-chip active" onclick="filterCatalog('all', this)">Все</button>
+          <button class="step-chip" onclick="filterCatalog('cigs', this)">Сигареты</button>
+          <button class="step-chip" onclick="filterCatalog('sticks', this)">Стики neo / KENT</button>
+          <button class="step-chip" onclick="filterCatalog('devices', this)">Устройства glo</button>
+          <button class="step-chip" onclick="filterCatalog('vuse', this)">Вейпы Vuse</button>
+        </div>
+
+        <div class="brands-grid" id="catalogGrid"></div>
+      </div>
+    </section>
+
+    <!-- ================= 3. АТТЕСТАЦИЯ (ЭКЗАМЕН) ================= -->
+    <section id="tabExam" class="section-tab">
+      <div class="card" style="text-align:center;">
+        
+        <!-- Вводное окно -->
+        <div id="examStartBox">
+          <div style="font-size:50px; margin-bottom:10px;">🎓😸</div>
+          <h2 style="font-size:1.3rem; font-weight:800; margin-bottom:6px;">Аттестационный экзамен ITMS</h2>
+          <p style="font-size:0.85rem; color:var(--text-muted); max-width:440px; margin:0 auto 16px;">
+            Ответьте на 6 вопросов по стандартам работы в EasyMerch V2. По итогам сформируется именной допуск!
+          </p>
+          <input type="text" id="studentNameInput" placeholder="Введите Фамилию и Имя" class="exam-input"><br>
+          <button class="btn-action" onclick="startExam()">Начать тестирование</button>
+        </div>
+
+        <!-- Тестирование -->
+        <div id="examQuizBox" style="display:none; text-align:left;">
+          <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:var(--text-muted); margin-bottom:12px; border-bottom:1px solid var(--border-color); padding-bottom:8px;">
+            <span id="examProgressText">Вопрос 1 из 6</span>
+            <span id="examScoreLive" style="color:var(--accent-amber); font-weight:700;">Баллы: 0</span>
+          </div>
+          <h3 style="font-size:0.95rem; font-weight:700; margin-bottom:14px;" id="examQuestionText"></h3>
+          <div id="examAnswersBox"></div>
+        </div>
+
+        <!-- Сертификат -->
+        <div id="examResultBox" style="display:none;">
+          <div class="cert-container">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:10px; margin-bottom:14px;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-size:24px;">🐾</span>
+                <div>
+                  <div style="font-size:0.75rem; font-weight:800; color:var(--accent-amber); letter-spacing:1px;">ITMS RUSSIA • СЕРТИФИКАТ</div>
+                  <div style="font-size:0.65rem; color:var(--text-muted);">Допуск к самостоятельным визитам</div>
+                </div>
+              </div>
+              <span style="background:rgba(16,185,129,0.2); color:var(--accent-emerald); border:1px solid rgba(16,185,129,0.4); padding:3px 8px; border-radius:999px; font-size:0.7rem; font-weight:800;">АТТЕСТОВАН</span>
+            </div>
+
+            <div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:4px;">Настоящим подтверждается, что мерчандайзер:</div>
+            <div style="font-size:1.2rem; font-weight:800; color:#fff; margin-bottom:8px;" id="certOwnerName">Иванов Иван</div>
+            <p style="font-size:0.75rem; color:#cbd5e1; line-height:1.5; margin-bottom:14px;">
+              Успешно освоил 6 этапов визита, складской аудит, регламент Тобакко Шопа (ТШ), ДО, работу с нейросетью Image Recognition (IR) и составление актов OOS в EasyMerch V2.
+            </p>
+
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; border-top:1px solid var(--border-color); padding-top:10px; font-size:0.75rem;">
+              <div>
+                <div>Результат: <strong style="color:var(--accent-emerald);" id="certScoreStr">6 из 6 (100%)</strong></div>
+                <div style="color:var(--text-muted); font-size:0.65rem;" id="certDateStr"></div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-weight:700;">СВ Барсик Семёнович 🐱</div>
+                <div style="color:#60a5fa; font-size:0.65rem;">ПЭП валидна</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
+            <button class="btn-action" style="background:var(--accent-emerald);" onclick="copyCertReport()">📋 Скопировать для СВ</button>
+            <button class="btn-action btn-secondary" onclick="restartExam()">Пройти снова</button>
+          </div>
+          <div id="copyNotice" style="font-size:0.8rem; color:var(--accent-emerald); margin-top:10px; display:none;">✓ Текст допуска скопирован! Отправьте его супервайзеру в мессенджер.</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= 4. РЕКОРДЫ И ЛОКАЛЬНЫЕ ДАННЫЕ ================= -->
+    <section id="tabRecords" class="section-tab">
+      <div class="card">
+        <h2 style="font-size:1.25rem; font-weight:800; margin-bottom:4px;">Личный кабинет и рекорды</h2>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:16px;">Все данные сохраняются прямо на вашем устройстве.</p>
+
+        <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; margin-bottom:20px;">
+          <div style="background:var(--bg-card-sub); border:1px solid var(--border-color); border-radius:12px; padding:14px; text-align:center;">
+            <div style="font-size:1.5rem; font-weight:800; color:var(--accent-amber);" id="recTotalXp">0</div>
+            <div style="font-size:0.75rem; color:var(--text-muted);">Накоплено XP</div>
+          </div>
+          <div style="background:var(--bg-card-sub); border:1px solid var(--border-color); border-radius:12px; padding:14px; text-align:center;">
+            <div style="font-size:1.5rem; font-weight:800; color:var(--accent-emerald);" id="recBestScore">0 / 6</div>
+            <div style="font-size:0.75rem; color:var(--text-muted);">Лучший экзамен</div>
+          </div>
+        </div>
+
+        <h3 style="font-size:0.9rem; font-weight:800; margin-bottom:10px;">Достижения</h3>
+        <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:20px;" id="badgeList"></div>
+
+        <h3 style="font-size:0.9rem; font-weight:800; margin-bottom:10px;">История прохождений</h3>
+        <div id="historyList" style="font-size:0.8rem; color:var(--text-muted);"></div>
+
+        <div style="margin-top:24px; text-align:right;">
+          <button class="btn-action btn-secondary" style="font-size:0.75rem; padding:8px 14px; color:var(--accent-rose);" onclick="clearLocalData()">🗑 Очистить рекорды</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- МОБИЛЬНАЯ НИЖНЯЯ ПАНЕЛЬ -->
+  <nav class="mobile-tab-bar">
+    <button class="tab-bar-item active" onclick="switchTab('trainer')" id="mTabTrainer">
+      <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6l9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z"/></svg>
+      <span>Шаги</span>
+    </button>
+    <button class="tab-bar-item" onclick="switchTab('brands')" id="mTabBrands">
+      <svg viewBox="0 0 24 24"><path d="M4 3h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m0 4v12h16V7H4m2 3h4v2H6v-2m0 4h7v2H6v-2Z"/></svg>
+      <span>Бренды</span>
+    </button>
+    <button class="tab-bar-item" onclick="switchTab('exam')" id="mTabExam">
+      <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m-2 15l-5-5l1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9Z"/></svg>
+      <span>Экзамен</span>
+    </button>
+    <button class="tab-bar-item" onclick="switchTab('records')" id="mTabRecords">
+      <svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.01 5.01 0 0 0 11 15.9V19H7v2h10v-2h-4v-3.1c1.92-.41 3.42-1.93 3.61-3.96c2.47-.31 4.39-2.39 4.39-4.94V7c0-1.1-.9-2-2-2M5 8V7h2v3.82C5.84 10.4 5 9.3 5 8m14 0c0 1.3-.84 2.4-2 2.82V7h2v1Z"/></svg>
+      <span>Рекорды</span>
+    </button>
+  </nav>
+
+  <!-- ЛОГИКА И ДАННЫЕ -->
+  <script>
+    // 6 ЭТАПОВ СТАНДАРТОВ
+    const STEPS_DATA = [
+      {
+        badge: "Этап 1 из 6",
+        title: "Подготовка к визиту",
+        progress: "16%",
+        theory: {
+          catRole: "Кот-Супервайзер Барсик",
+          catAvatar: "😸",
+          catSpeech: "Выход на маршрут с разряженным телефоном или без стикеров — это гарантированный срыв визита!",
+          rulesDo: [
+            "Зарядить смартфон до 100% и взять исправный Power Bank.",
+            "Проверить запуск и синхронизацию EasyMerch V2.",
+            "Иметь достаточный запас свежих стикеров ITMS и бейдж мерчандайзера.",
+            "Уточнить маршрут и циклические инструкции на день."
+          ],
+          rulesDont: [
+            "Выходить на маршрут с 20% батареи без зарядного устройства.",
+            "Надеяться найти старые стикеры в магазине.",
+            "Пытаться закрыть визит задним числом из дома (GPS фиксирует расхождение!)."
+          ],
+          tip: "Формула сборов: Смартфон + Power Bank + EasyMerch + Стикеры + Бейдж = Спокойная смена."
+        },
+        case: {
+          catRole: "Ситуация: Утро перед выходом",
+          catAvatar: "😿",
+          scenario: "На часах 08:30, до первой точки 25 минут пути. Заряд телефона 35%, а Power Bank забыт на зарядке. Что вы сделаете?",
+          question: "Правильное действие по стандарту ITMS?",
+          options: [
+            { text: "Поехать на точку, сделать Check-in, а остальное доделать вечером дома", correct: false, comment: "Грубое нарушение! Любой визит вне геозоны торговой точки бракуется инспектором." },
+            { text: "Обязательно взять Power Bank или подзарядить телефон, так как камера и GPS разрядят его за 20 минут", correct: true, comment: "Мяу! Верно! Без фото и Check-out визит не оплачивается." },
+            { text: "Скинуть фотографии витрины супервайзеру в Telegram вместо EasyMerch", correct: false, comment: "Супервайзер не принимает отчеты в мессенджерах — только через сервер." }
+          ]
+        }
+      },
+      {
+        badge: "Этап 2 из 6",
+        title: "Check-in и Приветствие",
+        progress: "33%",
+        theory: {
+          catRole: "Кот-Супервайзер Барсик",
+          catAvatar: "😼",
+          catSpeech: "Пришел в магазин? Зафиксируй точку в приложении и обязательно представься сотрудникам магазина.",
+          rulesDo: [
+            "Делать Check-in строго внутри магазина или на входе.",
+            "Поздороваться по формуле: «Здравствуйте! Меня зовут [Имя], компания ITMS (Kent, Dunhill, Rothmans, Ява)...»",
+            "Показать бейдж мерчандайзера директору или старшему кассиру.",
+            "Если магазин закрыт — заполнить «Отчет о проблеме». Если работает штатно — нажать «Пропустить шаг»."
+          ],
+          rulesDont: [
+            "Делать Check-in из автобуса за остановку до магазина.",
+            "Молча проходить в кассовую зону без уведомления персонала.",
+            "Выбирать ложные причины в отчете о проблемах, если магазин открыт."
+          ],
+          tip: "Если магазин работает штатно — в пункте «Отчет о проблеме» нажимаем «ПРОПУСТИТЬ ШАГ»!"
+        },
+        case: {
+          catRole: "Ситуация: Вход в супермаркет",
+          catAvatar: "😾",
+          scenario: "Вы вошли в магазин. Всё работает штатно. В приложении открылся раздел «Отчет о проблеме». Что нажать?",
+          question: "Действие в приложении EasyMerch:",
+          options: [
+            { text: "Выбрать причину «Инвентаризация», чтобы пропустить фото", correct: false, comment: "Ложные данные в отчетах ведут к блокировке учетной записи." },
+            { text: "Нажать кнопку «Пропустить шаг» и приступить к работе с оборудованием", correct: true, comment: "Идеально! Раздел проблем заполняется исключительно при закрытии или недопуске." },
+            { text: "Закрыть приложение и ждать звонка от руководства", correct: false, comment: "Пустая трата времени. Пропускаем шаг и идем на склад." }
+          ]
+        }
+      },
+      {
+        badge: "Этап 3 из 6",
+        title: "Места хранения (Склад)",
+        progress: "50%",
+        theory: {
+          catRole: "Товаровед Матильда",
+          catAvatar: "🐱",
+          catSpeech: "Пускаю на склад только тех, кто берет весь ассортимент, а не только то, что легче нести!",
+          rulesDo: [
+            "Отметить в опроснике статус «Допущен до мест хранения».",
+            "Вынести со склада ВЕСЬ сток ITMS: сигареты, стики neo/KENT и девайсы glo.",
+            "При недопуске: выбрать «Не допущен» и ОБЯЗАТЕЛЬНО записать ФИО и должность сотрудника магазина.",
+            "Максимально пополнить кассы и Тобакко Шоп."
+          ],
+          rulesDont: [
+            "Брать только классические сигареты, бросая стики и устройства в коробках.",
+            "Писать «Товара нет», даже не заглянув на складские полки.",
+            "Указывать «Не допущен» без реального имени товароведа."
+          ],
+          tip: "Вынос 100% доступной продукции со склада — прямая обязанность мерчандайзера!"
+        },
+        case: {
+          catRole: "Ситуация: Складской запас",
+          catAvatar: "📦",
+          scenario: "Товаровед пустил вас на склад. На витрине нет стиков neo Ванилла и девайсов glo Hyper. На складе в коробках они есть.",
+          question: "Как вы поступите?",
+          options: [
+            { text: "Взять только сигареты, так как со стиками много возни", correct: false, comment: "Стики и системы нагревания — ключевые категории, влияющие на бонус." },
+            { text: "Взять всю продукцию ITMS (сигареты, стики, девайсы) и заполнить полки", correct: true, comment: "Отлично! Нулевой OOS после визита — главный критерий качества!" },
+            { text: "Сказать кассиру, чтобы он сам пополнил витрину позже", correct: false, comment: "Кассир не обязан делать мерчандайзинг за вас." }
+          ]
+        }
+      },
+      {
+        badge: "Этап 4 из 6",
+        title: "Тобакко Шоп (ТШ), Кассы и ДО",
+        progress: "66%",
+        theory: {
+          catRole: "Кот-Супервайзер Барсик",
+          catAvatar: "🧐",
+          catSpeech: "Запомните порядок: если в магазине есть Тобакко Шоп (ТШ) — начинаем ВСЕГДА с него!",
+          rulesDo: [
+            "Начинать аудит с отдельного шкафа ТШ, затем переходить к кассам.",
+            "На каждой кассе отмечать реальный статус (Работает / Не торгует / Нет кассы).",
+            "Обязательно прорабатывать Дополнительное оборудование (ДО) — диспенсеры под стики.",
+            "Если ДО висит на кассе без шкафа — прикрепить его фото к шагу рабочей кассы с комментарием."
+          ],
+          rulesDont: [
+            "Игнорировать ТШ и сразу бежать на кассы.",
+            "Пропускать диспенсеры ДО со словами «в приложении нет под них вкладки».",
+            "Оставлять диспенсеры ДО наполовину пустыми."
+          ],
+          tip: "Все рекламные диспенсеры должны быть заполнены и сфотографированы!"
+        },
+        case: {
+          catRole: "Ситуация: Диспенсер на нерабочей кассе",
+          catAvatar: "😼",
+          scenario: "В магазине две кассы. На кассе №1 шкаф со стиками. На кассе №2 шкафа нет, но висит ДО под стики neo. В приложении создана только касса №1.",
+          question: "Как правильно оформить визит?",
+          options: [
+            { text: "Не трогать диспенсер на кассе №2", correct: false, comment: "Брак визита! Всё оборудование сети должно быть обслужено." },
+            { text: "Пополнить ДО на 2-й кассе, а фото прикрепить к шагу ДО 1-й кассы с комментарием «ДО со 2-й кассы»", correct: true, comment: "Браво! В точности по регламенту ITMS (слайды 35–37)." },
+            { text: "Снять диспенсер и перевесить его на первую кассу", correct: false, comment: "Самовольное перемещение оборудования запрещено дирекцией сетей." }
+          ]
+        }
+      },
+      {
+        badge: "Этап 5 из 6",
+        title: "Выкладка, Стикеры и Image Recognition (IR)",
+        progress: "83%",
+        theory: {
+          catRole: "Мерч-Котик Мурзик",
+          catAvatar: "🐱‍💻",
+          catSpeech: "Нейросеть распознала полку за 10 секунд! Но финальную проверку всегда делаем глазами.",
+          rulesDo: [
+            "Клеить стикеры строго по действующей планограмме, счищая старый клей.",
+            "Глубокая выкладка: накопители заполнять полностью (формат нано — от 10 пачек).",
+            "После съемки подождать ответа нейросети (до 10 секунд).",
+            "ОБЯЗАТЕЛЬНО перепроверить галочки наличия вручную перед отправкой."
+          ],
+          rulesDont: [
+            "Клеить новые ценники поверх грязи и ободранных старых стикеров.",
+            "Слепо доверять нейросети: блик от лампы может ошибочно скрыть пачку.",
+            "Нарушать последовательность вкусов в ряду."
+          ],
+          tip: "Нейросеть лишь ассистент — за достоверность наличия отвечает мерчандайзер!"
+        },
+        case: {
+          catRole: "Ситуация: Распознавание нейросетью",
+          catAvatar: "🧐",
+          scenario: "После фото нейросеть ошибочно поставила галочку «В наличии» пачке Dunhill, хотя толкатель был абсолютно пуст.",
+          question: "Что необходимо сделать?",
+          options: [
+            { text: "Оставить галочку «В наличии», раз программа так посчитала", correct: false, comment: "Контролер проверит фото. Если пачки нет, а статус стоит — визит аннулируют за обман!" },
+            { text: "Вручную снять отметку и поставить «Нет в наличии», приведя отчет в соответствие с фото", correct: true, comment: "Мяу, идеально! Всегда перепроверяйте статусы руками." },
+            { text: "Удалить все фото и закрыть отчет без снимков", correct: false, comment: "Без четких обзорных снимков визит не будет принят." }
+          ]
+        }
+      },
+      {
+        badge: "Этап 6 из 6",
+        title: "Отсутствие товара (OOS), Протокол и Check-out",
+        progress: "100%",
+        theory: {
+          catRole: "Кот-Супервайзер Барсик",
+          catAvatar: "📝",
+          catSpeech: "Если товара нет ни на кассе, ни на складе — оформляем электронный протокол OOS с подписью магазина.",
+          rulesDo: [
+            "Указать причину отсутствия (недопоставка, нулевой сток, ошибка матрицы).",
+            "ОБЯЗАТЕЛЬНО указать ФИО и должность представителя магазина (ЛПР).",
+            "Получить устное подтверждение от ЛПР и подписать протокол ПЭП.",
+            "Напомнить персоналу о регулярном пополнении полок ITMS.",
+            "Сделать Check-out перед самым выходом из магазина!"
+          ],
+          rulesDont: [
+            "Вписывать случайные фамилии «из головы» (данные сверяются сетью!).",
+            "Делать Check-out дома или на остановке транспорта.",
+            "Оставлять причины отсутствия незаполненными."
+          ],
+          tip: "Смена планограммы (от 4 единиц): на первом визите допускается оклейка 50% с указанием даты следующего прихода!"
+        },
+        case: {
+          catRole: "Ситуация: Оформление OOS",
+          catAvatar: "😼",
+          scenario: "Закончился Kent Кристалл. На складе его тоже нет. Товаровед подтвердила недопоставку товара со склада РЦ.",
+          question: "Как правильно оформить OOS в приложении?",
+          options: [
+            { text: "Написать супервайзеру в чат и пропустить протокол в EasyMerch", correct: false, comment: "Без протокола сеть не сформирует дополнительную заявку на поставку." },
+            { text: "В шаге «Отсутствие» выбрать «Недопоставка», внести ФИО товароведа и подписать протокол", correct: true, comment: "Великолепно! 100% соблюдение регламента OOS!" },
+            { text: "Отметить пачку как присутствующую, чтобы не портить статистику", correct: false, comment: "Фальсификация приведет к аннулированию визита и штрафу." }
+          ]
+        }
+      }
+    ];
+
+    // КАТАЛОГ ПРОДУКЦИИ
+    const BRANDS_LIST = [
+      { cat: 'cigs', name: 'Dunhill Fine Cut', sub: 'Свисс Бленд / Мастер', bg: 'linear-gradient(135deg, #451a03, #1c1917)', icon: '🚬', badge: 'King Size' },
+      { cat: 'cigs', name: 'Dunhill Aroma', sub: 'Ред / Браун', bg: 'linear-gradient(135deg, #7f1d1d, #18181b)', icon: '🚬', badge: 'Aroma' },
+      { cat: 'cigs', name: 'Kent Blue / Silver', sub: 'Классическая линейка', bg: 'linear-gradient(135deg, #1e3a8a, #0f172a)', icon: '🚬', badge: 'Core' },
+      { cat: 'cigs', name: 'Kent Нано', sub: 'Сильвер / Уайт / Микс', bg: 'linear-gradient(135deg, #334155, #0f172a)', icon: '🚬', badge: 'Nano' },
+      { cat: 'cigs', name: 'Kent Кристалл', sub: 'Микс / Руби / Бриз', bg: 'linear-gradient(135deg, #0e7490, #1e1b4b)', icon: '🚬', badge: 'Compact' },
+      { cat: 'cigs', name: 'Rothmans Royals', sub: 'Блю / Ред / Деми', bg: 'linear-gradient(135deg, #1e1b4b, #312e81)', icon: '🚬', badge: 'Royals' },
+      { cat: 'cigs', name: 'Rothmans Деми Клик', sub: 'Амбер / Мелон / Вольт', bg: 'linear-gradient(135deg, #581c87, #0f172a)', icon: '🚬', badge: 'Capsule' },
+      { cat: 'cigs', name: 'Ява Золотая 100', sub: 'Классическая / Оригинал', bg: 'linear-gradient(135deg, #b45309, #78350f)', icon: '🚬', badge: '100 мм' },
+      { cat: 'cigs', name: 'Ява Белое Золото', sub: 'Классика / Демислимс', bg: 'linear-gradient(135deg, #713f12, #422006)', icon: '🚬', badge: 'Classic' },
+      { cat: 'cigs', name: 'Vogue Super Slims', sub: 'Lilas / Blue / Menthe', bg: 'linear-gradient(135deg, #831843, #4c0519)', icon: '🚬', badge: 'Super Slims' },
+      { cat: 'cigs', name: 'Lucky Strike Compact', sub: 'Блю / Бласт / Сёрф', bg: 'linear-gradient(135deg, #18181b, #991b1b)', icon: '🚬', badge: 'Original' },
+      { cat: 'cigs', name: 'Lucky Strike Aroma', sub: 'Браун / Йеллоу / Ред', bg: 'linear-gradient(135deg, #78350f, #292524)', icon: '🚬', badge: 'Aroma' },
+      
+      { cat: 'sticks', name: 'neo Деми Берри Клик', sub: 'Ягодная капсула', bg: 'linear-gradient(135deg, #581c87, #1e1b4b)', icon: '🌿', badge: 'Стики Деми' },
+      { cat: 'sticks', name: 'neo Деми Руби Буст', sub: 'Ягодный микс', bg: 'linear-gradient(135deg, #881337, #4c0519)', icon: '🌿', badge: 'Стики Деми' },
+      { cat: 'sticks', name: 'neo Деми Ванилла', sub: 'Табачный ванильный бленд', bg: 'linear-gradient(135deg, #92400e, #451a03)', icon: '🌿', badge: 'Стики Деми' },
+      { cat: 'sticks', name: 'KENT Sticks Тобакко', sub: 'Классический табак', bg: 'linear-gradient(135deg, #1e3a8a, #172554)', icon: '🌿', badge: 'KENT glo' },
+      { cat: 'sticks', name: 'KENT Sticks Тропик', sub: 'Тропическая капсула', bg: 'linear-gradient(135deg, #065f46, #042f2e)', icon: '🌿', badge: 'KENT glo' },
+      { cat: 'sticks', name: 'neo Нано Классик', sub: 'Формат Нано для glo', bg: 'linear-gradient(135deg, #334155, #1e293b)', icon: '🌿', badge: 'Стики Нано' },
+
+      { cat: 'devices', name: 'glo Hyper X2', sub: 'Black / Gold / Blue', bg: 'linear-gradient(135deg, #c2410c, #7c2d12)', icon: '⚡', badge: 'Девайс glo' },
+      { cat: 'devices', name: 'glo Hyper Air', sub: 'Ультратонкий корпус', bg: 'linear-gradient(135deg, #0369a1, #0c4a6e)', icon: '⚡', badge: 'Девайс glo' },
+      { cat: 'devices', name: 'glo Hyper XS', sub: 'Компактная серия', bg: 'linear-gradient(135deg, #0f766e, #134e4a)', icon: '⚡', badge: 'Девайс glo' },
+      { cat: 'devices', name: 'Бандлы glo 3.0', sub: 'Устройство + пачки', bg: 'linear-gradient(135deg, #4338ca, #1e1b4b)', icon: '⚡', badge: 'Набор' },
+
+      { cat: 'vuse', name: 'Vuse GO 600', sub: 'Черника / Арбуз / Ананас', bg: 'linear-gradient(135deg, #6d28d9, #4c1d95)', icon: '💨', badge: '600 тяг' },
+      { cat: 'vuse', name: 'Vuse GO 1500', sub: 'Манго / Кола / Мята', bg: 'linear-gradient(135deg, #a21caf, #701a75)', icon: '💨', badge: '1500 тяг' },
+      { cat: 'vuse', name: 'Vuse PRO 5000', sub: 'Клубника / Энергетик', bg: 'linear-gradient(135deg, #be123c, #881337)', icon: '💨', badge: '5000 тяг' }
+    ];
+
+    // ВОПРОСЫ ЭКЗАМЕНА
+    const EXAM_DATA = [
+      {
+        q: "С какого торгового оборудования мерчандайзер ОБЯЗАН начать выкладку при его наличии в магазине?",
+        opts: [
+          { t: "С кассы №1, так как там проще встать", c: false },
+          { t: "Всегда с Тобакко Шопа (ТШ), а затем переходить к кассовой линейке", c: true },
+          { t: "С любого места на усмотрение сотрудника", c: false }
+        ]
+      },
+      {
+        q: "Что именно мерчандайзер обязан вынести со склада (мест хранения) в торговый зал?",
+        opts: [
+          { t: "Только те пачки, которые закончились на первой кассе", c: false },
+          { t: "Всю продукцию ITMS: сигареты, стики neo/KENT и девайсы glo для полного пополнения", c: true },
+          { t: "Только новинки текущей недели", c: false }
+        ]
+      },
+      {
+        q: "Как поступить, если магазин открыт, очередей нет, но в EasyMerch открылся раздел «Отчет о проблеме»?",
+        opts: [
+          { t: "Нажать «Пропустить шаг» и продолжить штатную работу", c: true },
+          { t: "Выбрать любую причину ради сокращенного отчета", c: false },
+          { t: "Закрыть визит и уйти из магазина", c: false }
+        ]
+      },
+      {
+        q: "Как правильно работать с нейросетью распознавания полок Image Recognition (IR)?",
+        opts: [
+          { t: "Полностью довериться результатам автоматики", c: false },
+          { t: "Дождаться обработки (до 10 сек) и обязательно вручную перепроверить галочки по фото", c: true },
+          { t: "Отключить интернет, чтобы не запускать нейросеть", c: false }
+        ]
+      },
+      {
+        q: "Как оформить Дополнительное оборудование (ДО) со стиками на кассе без табачного шкафа?",
+        opts: [
+          { t: "Пополнить ДО, а фото прикрепить к шагу ДО рабочей кассы с поясняющим комментарием", c: true },
+          { t: "Проигнорировать диспенсер, раз под него нет шкафа", c: false },
+          { t: "Переставить диспенсер на другую кассу самостоятельно", c: false }
+        ]
+      },
+      {
+        q: "Что обязательно фиксируется в электронном протоколе при отсутствии SKU (OOS)?",
+        opts: [
+          { t: "Только название сигарет, имена сотрудников не требуются", c: false },
+          { t: "Причина OOS, ФИО и должность представителя магазина (ЛПР), подтверждение и ПЭП", c: true },
+          { t: "Личный номер супервайзера", c: false }
+        ]
+      }
+    ];
+
+    // СОСТОЯНИЕ И ХРАНИЛИЩЕ
+    let currentStep = 0;
+    let currentMode = 'theory';
+    let totalXp = 0;
+    let examStep = 0;
+    let examLiveScore = 0;
+    let candidateName = "Мерчандайзер ITMS";
+
+    function loadRecords() {
+      try {
+        const savedXp = localStorage.getItem('itms_merch_xp');
+        if (savedXp) totalXp = parseInt(savedXp, 10);
+        document.getElementById('scoreVal').innerText = totalXp + ' XP';
+        document.getElementById('recTotalXp').innerText = totalXp;
+
+        const bestExam = localStorage.getItem('itms_best_exam') || '0 / 6';
+        document.getElementById('recBestScore').innerText = bestExam;
+
+        renderBadges();
+        renderHistory();
+      } catch (e) {
+        console.warn('LocalStorage недоступен:', e);
+      }
+    }
+
+    function addXp(amount) {
+      totalXp += amount;
+      document.getElementById('scoreVal').innerText = totalXp + ' XP';
+      document.getElementById('recTotalXp').innerText = totalXp;
+      try {
+        localStorage.setItem('itms_merch_xp', totalXp);
+      } catch(e) {}
+      renderBadges();
+    }
+
+    function renderBadges() {
+      const bBox = document.getElementById('badgeList');
+      if (!bBox) return;
+      const badges = [
+        { title: "Новобранец ITMS", desc: "Начало обучения", unlocked: true },
+        { title: "Практик Барсика", desc: "Заработано 100+ XP на кейсах", unlocked: totalXp >= 100 },
+        { title: "Эксперт визита", desc: "Заработано 250+ XP", unlocked: totalXp >= 250 },
+        { title: "Аттестован на 100%", desc: "Сдан экзамен на 6 из 6", unlocked: (localStorage.getItem('itms_best_exam') || '').includes('6 / 6') }
+      ];
+
+      bBox.innerHTML = badges.map(b => `
+        <div style="background:var(--bg-card-sub); border:1px solid ${b.unlocked ? 'var(--accent-emerald)' : 'var(--border-color)'}; border-radius:10px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div style="font-weight:700; font-size:0.8rem; color:${b.unlocked ? '#a7f3d0' : 'var(--text-muted)'};">${b.title}</div>
+            <div style="font-size:0.7rem; color:var(--text-muted);">${b.desc}</div>
+          </div>
+          <span style="font-size:0.8rem;">${b.unlocked ? '🏅' : '🔒'}</span>
+        </div>
+      `).join('');
+    }
+
+    function renderHistory() {
+      const hBox = document.getElementById('historyList');
+      if (!hBox) return;
+      try {
+        const hist = JSON.parse(localStorage.getItem('itms_exam_history') || '[]');
+        if (hist.length === 0) {
+          hBox.innerHTML = 'Пока нет завершенных попыток аттестации.';
+          return;
+        }
+        hBox.innerHTML = hist.slice(-5).reverse().map(h => `
+          <div style="padding:8px 0; border-bottom:1px solid var(--border-color); display:flex; justify-content:space-between;">
+            <span>${h.name} (${h.score})</span>
+            <span style="color:var(--text-muted);">${h.date}</span>
+          </div>
+        `).join('');
+      } catch (e) {
+        hBox.innerHTML = 'История недоступна.';
+      }
+    }
+
+    function clearLocalData() {
+      if (confirm('Сбросить все рекорды и историю?')) {
+        localStorage.removeItem('itms_merch_xp');
+        localStorage.removeItem('itms_best_exam');
+        localStorage.removeItem('itms_exam_history');
+        totalXp = 0;
+        loadRecords();
+      }
+    }
+
+    // НАВИГАЦИЯ МЕЖДУ РАЗДЕЛАМИ
+    function switchTab(tabId) {
+      document.querySelectorAll('.section-tab').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-bar-item').forEach(el => el.classList.remove('active'));
+
+      if (tabId === 'trainer') {
+        document.getElementById('tabTrainer').classList.add('active');
+        document.getElementById('dTabTrainer').classList.add('active');
+        document.getElementById('mTabTrainer').classList.add('active');
+      } else if (tabId === 'brands') {
+        document.getElementById('tabBrands').classList.add('active');
+        document.getElementById('dTabBrands').classList.add('active');
+        document.getElementById('mTabBrands').classList.add('active');
+        renderCatalog('all');
+      } else if (tabId === 'exam') {
+        document.getElementById('tabExam').classList.add('active');
+        document.getElementById('dTabExam').classList.add('active');
+        document.getElementById('mTabExam').classList.add('active');
+      } else if (tabId === 'records') {
+        document.getElementById('tabRecords').classList.add('active');
+        document.getElementById('dTabRecords').classList.add('active');
+        document.getElementById('mTabRecords').classList.add('active');
+        loadRecords();
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ЛОГИКА ТРЕНАЖЕРА ШАГОВ
+    function renderStep() {
+      const data = STEPS_DATA[currentStep];
+
+      document.getElementById('stepBadge').innerText = data.badge;
+      document.getElementById('stepHeading').innerText = data.title;
+      document.getElementById('stepProgressNum').innerText = data.progress;
+      document.getElementById('stepProgressBar').style.width = data.progress;
+      document.getElementById('stepFooterNum').innerText = `Шаг ${currentStep + 1} из 6`;
+
+      // Чипы
+      for (let i = 0; i < 6; i++) {
+        const chip = document.getElementById(`chip${i}`);
+        if (chip) chip.className = (i === currentStep) ? 'step-chip active' : 'step-chip';
+      }
+
+      // Теория
+      document.getElementById('theoryCatAvatar').innerText = data.theory.catAvatar;
+      document.getElementById('theoryCatRole').innerText = data.theory.catRole;
+      document.getElementById('theoryCatSpeech').innerText = data.theory.catSpeech;
+      document.getElementById('theoryTip').innerText = data.theory.tip;
+
+      const doBox = document.getElementById('rulesDoList');
+      doBox.innerHTML = data.theory.rulesDo.map(r => `
+        <div class="rule-item"><span style="color:var(--accent-emerald); font-weight:bold;">✓</span><span>${r}</span></div>
+      `).join('');
+
+      const dontBox = document.getElementById('rulesDontList');
+      dontBox.innerHTML = data.theory.rulesDont.map(r => `
+        <div class="rule-item"><span style="color:var(--accent-rose); font-weight:bold;">✕</span><span>${r}</span></div>
+      `).join('');
+
+      // Кейс
+      document.getElementById('caseCatAvatar').innerText = data.case.catAvatar;
+      document.getElementById('caseCatRole').innerText = data.case.catRole;
+      document.getElementById('caseScenario').innerText = data.case.scenario;
+      document.getElementById('caseQuestion').innerText = data.case.question;
+
+      const optsBox = document.getElementById('caseOptionsList');
+      optsBox.innerHTML = '';
+      const feedbackBox = document.getElementById('caseFeedbackBox');
+      feedbackBox.style.display = 'none';
+
+      data.case.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'case-option-btn';
+        btn.innerHTML = `<span>${opt.text}</span><span style="font-size:0.7rem; border:1px solid var(--border-color); padding:3px 6px; border-radius:6px; color:var(--text-muted);">Выбрать</span>`;
+        btn.onclick = () => selectCaseOption(idx);
+        optsBox.appendChild(btn);
+      });
+
+      document.getElementById('btnPrevStep').disabled = (currentStep === 0);
+      document.getElementById('btnNextStep').innerText = (currentStep === 5) ? "К аттестации 🎓" : "Далее →";
+    }
+
+    function toggleMode(mode) {
+      currentMode = mode;
+      const bTheory = document.getElementById('boxTheory');
+      const bPractice = document.getElementById('boxPractice');
+      const btnT = document.getElementById('modeBtnTheory');
+      const btnP = document.getElementById('modeBtnPractice');
+
+      if (mode === 'theory') {
+        bTheory.style.display = 'block';
+        bPractice.style.display = 'none';
+        btnT.className = 'mode-btn active-theory';
+        btnP.className = 'mode-btn';
+      } else {
+        bTheory.style.display = 'none';
+        bPractice.style.display = 'block';
+        btnP.className = 'mode-btn active-practice';
+        btnT.className = 'mode-btn';
+      }
+    }
+
+    function selectCaseOption(idx) {
+      const data = STEPS_DATA[currentStep].case;
+      const opt = data.options[idx];
+      const feedback = document.getElementById('caseFeedbackBox');
+      const btns = document.querySelectorAll('#caseOptionsList button');
+
+      feedback.style.display = 'block';
+
+      if (opt.correct) {
+        addXp(50);
+        feedback.style.background = 'rgba(16, 185, 129, 0.15)';
+        feedback.style.border = '1px solid var(--accent-emerald)';
+        feedback.style.color = '#a7f3d0';
+        feedback.innerHTML = `<strong>😻 Барсик одобряет:</strong><br>${opt.comment}`;
+        btns[idx].classList.add('opt-correct');
+      } else {
+        feedback.style.background = 'rgba(244, 63, 94, 0.15)';
+        feedback.style.border = '1px solid var(--accent-rose)';
+        feedback.style.color = '#fecdd3';
+        feedback.innerHTML = `<strong>😾 Ошибка стандарта:</strong><br>${opt.comment}`;
+        btns[idx].classList.add('opt-wrong');
+      }
+    }
+
+    function goToStep(idx) {
+      currentStep = idx;
+      renderStep();
+    }
+
+    function prevStep() {
+      if (currentStep > 0) {
+        currentStep--;
+        renderStep();
+      }
+    }
+
+    function nextStep() {
+      if (currentStep < 5) {
+        currentStep++;
+        renderStep();
+      } else {
+        switchTab('exam');
+      }
+    }
+
+    // КАТАЛОГ ПРОДУКЦИИ
+    function renderCatalog(filter) {
+      const grid = document.getElementById('catalogGrid');
+      grid.innerHTML = '';
+      const list = filter === 'all' ? BRANDS_LIST : BRANDS_LIST.filter(b => b.cat === filter);
+
+      list.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'brand-item-card';
+        div.innerHTML = `
+          <div class="pack-mockup" style="background:${item.bg};">
+            <span class="pack-badge">${item.badge}</span>
+            <div style="font-size:32px; margin-bottom:4px;">${item.icon}</div>
+            <div style="font-size:0.65rem; font-weight:800; text-transform:uppercase; letter-spacing:0.5px; color:#fff;">${item.name}</div>
+          </div>
+          <div>
+            <div style="font-size:0.8rem; font-weight:700;">${item.name}</div>
+            <div style="font-size:0.7rem; color:var(--text-muted);">${item.sub}</div>
+          </div>
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    function filterCatalog(cat, btn) {
+      document.querySelectorAll('.filter-scroll-row .step-chip').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      renderCatalog(cat);
+    }
+
+    // ЭКЗАМЕН И СЕРТИФИКАТ
+    function startExam() {
+      const nameInp = document.getElementById('studentNameInput').value.trim();
+      if (nameInp) candidateName = nameInp;
+
+      document.getElementById('examStartBox').style.display = 'none';
+      document.getElementById('examQuizBox').style.display = 'block';
+      document.getElementById('examResultBox').style.display = 'none';
+
+      examStep = 0;
+      examLiveScore = 0;
+      renderExamQ();
+    }
+
+    function renderExamQ() {
+      const q = EXAM_DATA[examStep];
+      document.getElementById('examProgressText').innerText = `Вопрос ${examStep + 1} из ${EXAM_DATA.length}`;
+      document.getElementById('examScoreLive').innerText = `Баллы: ${examLiveScore}`;
+      document.getElementById('examQuestionText').innerText = q.q;
+
+      const ansBox = document.getElementById('examAnswersBox');
+      ansBox.innerHTML = '';
+
+      q.opts.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'case-option-btn';
+        btn.innerText = opt.t;
+        btn.onclick = () => {
+          if (opt.c) examLiveScore++;
+          if (examStep < EXAM_DATA.length - 1) {
+            examStep++;
+            renderExamQ();
+          } else {
+            finishExam();
+          }
+        };
+        ansBox.appendChild(btn);
+      });
+    }
+
+    function finishExam() {
+      document.getElementById('examQuizBox').style.display = 'none';
+      document.getElementById('examResultBox').style.display = 'block';
+
+      document.getElementById('certOwnerName').innerText = candidateName;
+      document.getElementById('certScoreStr').innerText = `${examLiveScore} из ${EXAM_DATA.length} (${Math.round(examLiveScore/EXAM_DATA.length*100)}%)`;
+      const dateStr = new Date().toLocaleDateString('ru-RU');
+      document.getElementById('certDateStr').innerText = `Дата: ${dateStr}`;
+
+      addXp(examLiveScore * 20);
+
+      // Сохранение рекорда экзамена
+      try {
+        const currentBest = localStorage.getItem('itms_best_exam') || '0 / 6';
+        const bestNum = parseInt(currentBest.split('/')[0], 10) || 0;
+        if (examLiveScore > bestNum) {
+          localStorage.setItem('itms_best_exam', `${examLiveScore} / ${EXAM_DATA.length}`);
+        }
+
+        const history = JSON.parse(localStorage.getItem('itms_exam_history') || '[]');
+        history.push({
+          name: candidateName,
+          score: `${examLiveScore}/${EXAM_DATA.length}`,
+          date: dateStr
+        });
+        localStorage.setItem('itms_exam_history', JSON.stringify(history));
+      } catch (e) {}
+
+      loadRecords();
+    }
+
+    function restartExam() {
+      document.getElementById('examResultBox').style.display = 'none';
+      document.getElementById('examStartBox').style.display = 'block';
+    }
+
+    function copyCertReport() {
+      const text = `📋 ОТЧЕТ ОБ АТТЕСТАЦИИ ITMS\nМерчандайзер: ${candidateName}\nРезультат: ${examLiveScore} из ${EXAM_DATA.length}\nСтандарты 6 этапов визита, складской аудит, ТШ/ДО и OOS в EasyMerch V2 освоены. Допущен к работе.`;
+      
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(showNotice);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showNotice();
+      }
+    }
+
+    function showNotice() {
+      const n = document.getElementById('copyNotice');
+      n.style.display = 'block';
+      setTimeout(() => { n.style.display = 'none'; }, 4000);
+    }
+
+    // Инициализация при загрузке
+    renderStep();
+    loadRecords();
+  </script>
+</body>
+</html>
